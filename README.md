@@ -18,10 +18,6 @@ Copy `.env.local.example` to `.env.local` and set your GitHub and LinkedIn URLs:
 - `NEXT_PUBLIC_GITHUB_URL`
 - `NEXT_PUBLIC_LINKEDIN_URL`
 
-## Syntax highlighter
-
-To compare Prism vs react-syntax-highlighter, open [/ctf/syntax-test](/ctf/syntax-test). Set `NEXT_PUBLIC_SYNTAX_HIGHLIGHTER=prism` or `rsh` in `.env.local` to lock in your choice (default is `prism`).
-
 ## Resume page
 
 - **On-page content**: Edit `app/resume/page.mdx` and paste your resume (headings, lists, paragraphs). It renders as MDX on `/resume`.
