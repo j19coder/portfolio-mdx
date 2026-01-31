@@ -107,20 +107,23 @@ export default function Header() {
         aria-hidden={!menuOpen}
       >
         <div
-          className="flex h-full flex-col items-end justify-start pt-6 pr-6 text-right"
+          className="flex h-full flex-col items-end justify-start pt-0 pr-4 text-right"
           onClick={(e) => e.stopPropagation()}
         >
-          {navLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={closeMenu}
-              className={linkClass}
-            >
-              {label}
-            </Link>
-          ))}
-          <div className="mt-4 flex items-center gap-4 text-right">
+          <div className="w-full max-w-[280px] rounded-lg border border-zinc-700 bg-zinc-900 px-6 py-4 shadow-lg">
+            {navLinks.map(({ href, label }) => (
+              <div key={href} className="border-b border-zinc-800 last:border-b-0">
+                <Link
+                  href={href}
+                  onClick={closeMenu}
+                  className={linkClass}
+                >
+                  {label}
+                </Link>
+              </div>
+            ))}
+            <div className="border-t border-zinc-800 pt-4 mt-4" />
+            <div className="flex items-center justify-end gap-4 text-right">
             <a
               href={GITHUB_URL}
               target="_blank"
@@ -151,6 +154,7 @@ export default function Header() {
                 <Mail size={22} />
               </a>
             ) : null}
+            </div>
           </div>
         </div>
       </div>

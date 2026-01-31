@@ -3,7 +3,7 @@ import Link from "next/link";
 type PlatformKey = "overthewire" | "htb" | "tryhackme";
 
 const platformLabels: Record<PlatformKey, string> = {
-  overthewire: "OverTheWire",
+  overthewire: "Wargames - OverTheWire",
   htb: "HackTheBox (HTB)",
   tryhackme: "TryHackMe (THM)",
 };
@@ -17,18 +17,6 @@ const ctfSections: Record<PlatformKey, BoxGroup[]> = {
     { boxType: "Bandit", items: [{ slug: "bandit-level-0", title: "Level 0", date: "2025-12-12 23:44" }, 
       { slug: "bandit-level-1", title: "Level 1", date: "2025-12-12 23:51" }] },
     { boxType: "Leviathan", items: [] },
-    { boxType: "Other", items: [] },
-  ],
-  htb: [
-    { boxType: "Linux", items: [{ slug: "sample", title: "Sample Machine", date: "2026-01-30" }] },
-    { boxType: "Windows", items: [] },
-    { boxType: "Web", items: [] },
-    { boxType: "Active Directory", items: [] },
-    { boxType: "Other", items: [] },
-  ],
-  tryhackme: [
-    { boxType: "Rooms", items: [] },
-    { boxType: "Paths", items: [] },
     { boxType: "Other", items: [] },
   ],
 };
