@@ -1,11 +1,9 @@
 import Link from "next/link";
 
-type PlatformKey = "overthewire" | "htb" | "tryhackme";
+type PlatformKey = "overthewire";
 
 const platformLabels: Record<PlatformKey, string> = {
-  overthewire: "Wargames - OverTheWire",
-  htb: "HackTheBox (HTB)",
-  tryhackme: "TryHackMe (THM)",
+  overthewire: "OverTheWire",
 };
 
 type Walkthrough = { slug: string; title: string; date: string };
