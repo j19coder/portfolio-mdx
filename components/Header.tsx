@@ -3,9 +3,9 @@
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { Github, Linkedin, Mail, Menu, X } from "lucide-react";
+import LinkedInLink from "@/components/LinkedInLink";
 
 const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com";
-const LINKEDIN_URL = process.env.NEXT_PUBLIC_LINKEDIN_URL ?? "https://linkedin.com";
 const EMAIL = process.env.NEXT_PUBLIC_EMAIL ?? "";
 
 const navLinks = [
@@ -62,15 +62,10 @@ export default function Header() {
             >
               <Github size={20} />
             </a>
-            <a
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
+            <LinkedInLink
               className="rounded p-1.5 text-zinc-400 transition hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 focus:ring-offset-zinc-950"
-            >
-              <Linkedin size={20} />
-            </a>
+              size={20}
+            />
             {EMAIL ? (
               <a
                 href={`mailto:${EMAIL}`}
@@ -134,16 +129,11 @@ export default function Header() {
             >
               <Github size={22} />
             </a>
-            <a
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
+            <LinkedInLink
               onClick={closeMenu}
               className="rounded p-2 text-zinc-400 transition hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 focus:ring-offset-zinc-950"
-            >
-              <Linkedin size={22} />
-            </a>
+              size={22}
+            />
             {EMAIL ? (
               <a
                 href={`mailto:${EMAIL}`}

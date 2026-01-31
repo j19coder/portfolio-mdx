@@ -3,7 +3,7 @@ import Link from "next/link";
 type PlatformKey = "overthewire";
 
 const platformLabels: Record<PlatformKey, string> = {
-  overthewire: "OverTheWire",
+  overthewire: "Wargames - OverTheWire",
 };
 
 type Walkthrough = { slug: string; title: string; date: string };
