@@ -1,0 +1,40 @@
+# Bandit Level 1
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-12 23:51
+
+## Overview
+
+Bandit Level 1: The password for Level 2 is stored in a file named **`-`** (a single dash) in the home directory. Because `-` is treated as stdin by many commands, you need to refer to the file explicitly (e.g. `./-` or `-- -`).
+
+**Connection:** `bandit.labs.overthewire.org` on port 2220  
+**User:** `bandit1`  
+**Password:** (use the password from Level 0’s `readme` file)
+
+## Steps
+
+### 1. SSH into the server as bandit1
+
+<Terminal title="local" command="ssh bandit1@bandit.labs.overthewire.org -p 2220" output="(enter the password you found in Level 0 when prompted)" />
+
+### 2. List files in home directory
+
+<Terminal title="bandit1@bandit" prompt="bandit1@bandit:~$ " command="ls -la" output="-rw-r----- 1 bandit2 bandit1 33 ... -" />
+
+The file is named `-` (dash).
+
+### 3. Read the file named -
+
+Because `cat -` would read from stdin, use a path so the shell treats it as a file:
+
+<Terminal title="bandit1@bandit" prompt="bandit1@bandit:~$ " command="cat ./-" output="(password for bandit2)" />
+
+Alternatively: `cat -- -` or `cat \"-\"` works on many systems.
+
+The output is the password for Bandit Level 2. Use it to continue with `ssh bandit2@bandit.labs.overthewire.org -p 2220`.
+
+## Summary
+
+- The password is in a file named `-`; refer to it as `./-` or `-- -` so the command does not interpret `-` as stdin.
+- `ls -la` shows the filename when `ls` alone might make it easy to miss.
