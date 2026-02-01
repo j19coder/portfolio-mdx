@@ -1,0 +1,41 @@
+# Bandit Level 2 -> Level 3
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-13 00:01
+
+## Overview
+
+Bandit Level 2: The password for Level 3 is stored in a file named **`--spaces in this filename--`** in the home directory. Because the filename starts with --, the shell may interpret it as a command option, so you must refer to the file explicitly using **quotes** or **escape characters**.
+
+### **Connection:** 
+**Host:** `bandit.labs.overthewire.org` on port 2220  
+**User:** `bandit2`  
+**Password:** (use the password from Level 1's `-` file)
+
+## Steps
+
+### 1. SSH into the server as bandit2
+
+<Terminal title="local" command="ssh bandit2@bandit.labs.overthewire.org -p 2220" output="(enter the password you found in Level 1 when prompted)" />
+
+### 2. List files in home directory
+
+<Terminal title="bandit1@bandit" prompt="bandit1@bandit:~$ " command="ls -la" output="-rw-r-----   1 bandit3 bandit2   33 ... --spaces in this filename--" />
+
+The file is named `--spaces in this filename--`.
+
+### 3. Read the file named --spaces in this filename--
+
+Because `cat --` interprets anything after `--` as options one will need to escape it:
+
+<Terminal title="bandit1@bandit" prompt="bandit1@bandit:~$ " command="cat ./--spaces\ in\ this\ filename--" output="(password for bandit3)" />
+
+Alternatively: `cat -- "--spaces in this filename--"` or `cat -- --spaces\ in\ this\ filename--` works too.
+
+The output is the password for Bandit Level 3. Use it to continue with `ssh bandit3@bandit.labs.overthewire.org -p 2220`.
+
+## Summary
+
+- The password is in a file named `---spaces in this filename--; refer to it as `./--spaces in this filename--` or `-- --spaces in this filename--` so the command does not interpret `--` as a command option.
+- Basic commands: `ls` to list files, `cat` to read file contents.
