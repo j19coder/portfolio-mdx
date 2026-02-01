@@ -1,9 +1,11 @@
 import type { MDXComponents } from "mdx/types";
 import Terminal from "@/components/Terminal";
+import CodeSnippet from "@/components/CodeSnippet";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     Terminal,
+    CodeSnippet,
     h1: ({ className, ...props }) => (
       <h1 className={`${className ?? ""} text-cyan-300`} {...props} />
     ),
