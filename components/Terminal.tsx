@@ -52,7 +52,7 @@ export default function Terminal({
   }, [fullText]);
 
   return (
-    <div className="overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 font-mono text-sm shadow-lg">
+    <div data-component="terminal" className="overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 font-mono text-sm shadow-lg">
       <div className="flex items-center justify-between border-b border-zinc-700 bg-zinc-800/80 px-3 py-2">
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-zinc-500" />

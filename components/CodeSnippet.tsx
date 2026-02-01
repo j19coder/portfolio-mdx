@@ -57,7 +57,7 @@ export default function CodeSnippet({
       ? language.charAt(0).toUpperCase() + language.slice(1).toLowerCase()
       : null;
   return (
-    <div className="overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 font-mono text-sm shadow-lg">
+    <div data-component="code-snippet" className="overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 font-mono text-sm shadow-lg">
       <div className="flex items-center justify-between border-b border-zinc-700 bg-zinc-800/80 px-3 py-2">
         <span className="text-xs text-zinc-400">{title ?? "Code"}</span>
         <div className="flex items-center gap-2">

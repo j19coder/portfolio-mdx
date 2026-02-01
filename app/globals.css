@@ -83,3 +83,48 @@ main a:hover {
   color: #c4b5fd;
 }
 
+/* Inline code (single backticks) – regular MD/MDX */
+main :not(pre) > code {
+  font-family: var(--font-mono), ui-monospace, monospace !important;
+  font-size: 0.9em !important;
+  padding: 0.15em 0.35em !important;
+  border-radius: 0.25rem !important;
+  background: #27272a !important;
+  color: #e4e4e7 !important;
+  border: 1px solid #3f3f46 !important;
+}
+
+/* Fenced code blocks (triple backticks) – regular MD/MDX */
+main pre {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+  padding: 1rem 1.25rem !important;
+  border-radius: 0.5rem !important;
+  background: #18181b !important;
+  border: 1px solid #3f3f46 !important;
+  overflow-x: auto !important;
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
+}
+main pre code {
+  font-family: var(--font-mono), ui-monospace, monospace !important;
+  color: #e4e4e7 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  font-size: inherit !important;
+}
+
+/* Reset so Terminal and CodeSnippet keep their own styling */
+main [data-component="terminal"] code,
+main [data-component="terminal"] pre,
+main [data-component="code-snippet"] code,
+main [data-component="code-snippet"] pre {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font-size: inherit !important;
+}
+

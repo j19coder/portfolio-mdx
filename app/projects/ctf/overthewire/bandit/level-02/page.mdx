@@ -9,7 +9,8 @@
 Bandit Level 2: The password for Level 3 is stored in a file named **`--spaces in this filename--`** in the home directory. Because the filename starts with --, the shell may interpret it as a command option, so you must refer to the file explicitly using **quotes** or **escape characters**.
 
 ### **Connection:** 
-**Host:** `bandit.labs.overthewire.org` on port 2220  
+**Host:** `bandit.labs.overthewire.org`  
+**Port:** `2220`  
 **User:** `bandit2`  
 **Password:** (use the password from Level 1's `-` file)
 
@@ -37,5 +38,5 @@ The output is the password for Bandit Level 3. Use it to continue with `ssh band
 
 ## Summary
 
-- The password is in a file named `---spaces in this filename--; refer to it as `./--spaces in this filename--` or `-- --spaces in this filename--` so the command does not interpret `--` as a command option.
+- The password is in a file named `--spaces in this filename--`. Refer to it as `./--spaces\ in\ this\ filename--` or `-- --spaces\ in\ this\ filename--` so the command does not interpret `--` as a command option.
 - Basic commands: `ls` to list files, `cat` to read file contents.
