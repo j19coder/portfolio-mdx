@@ -22,7 +22,7 @@ Bandit Level 2: The password for Level 3 is stored in a file named **`--spaces i
 
 ### 2. List files in home directory
 
-<Terminal title="bandit1@bandit" prompt="bandit1@bandit:~$ " command="ls -la" output="-rw-r-----   1 bandit3 bandit2   33 ... --spaces in this filename--" />
+<Terminal title="bandit2@bandit" prompt="bandit2@bandit:~$ " command="ls -la" output="-rw-r-----   1 bandit3 bandit2   33 ... --spaces in this filename--" />
 
 The file is named `--spaces in this filename--`.
 
@@ -30,7 +30,7 @@ The file is named `--spaces in this filename--`.
 
 Because `cat --` interprets anything after `--` as options one will need to escape it:
 
-<Terminal title="bandit1@bandit" prompt="bandit1@bandit:~$ " command="cat ./--spaces\ in\ this\ filename--" output="(password for bandit3)" />
+<Terminal title="bandit2@bandit" prompt="bandit2@bandit:~$ " command="cat ./--spaces\ in\ this\ filename--" output="(password for bandit3)" />
 
 Alternatively: `cat -- "--spaces in this filename--"` or `cat -- --spaces\ in\ this\ filename--` works too.
 
