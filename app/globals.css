@@ -44,6 +44,24 @@ main h3 {
   margin-top: 1.25rem;
   margin-bottom: 0.375rem;
 }
+main h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 1.125rem;
+  margin-bottom: 0.25rem;
+}
+main h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+main h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 0.875rem;
+  margin-bottom: 0.25rem;
+}
 main p {
   margin-bottom: 0.75rem;
   line-height: 1.6;

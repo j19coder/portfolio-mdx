@@ -13,6 +13,15 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h3: ({ className, ...props }) => (
       <h3 className={`${className ?? ""} text-cyan-200`} {...props} />
     ),
+    h4: ({ className, ...props }) => (
+      <h4 className={`${className ?? ""} text-cyan-100`} {...props} />
+    ),
+    h5: ({ className, ...props }) => (
+      <h5 className={`${className ?? ""} text-zinc-300`} {...props} />
+    ),
+    h6: ({ className, ...props }) => (
+      <h6 className={`${className ?? ""} text-zinc-400`} {...props} />
+    ),
     ...components,
   };
 }
