@@ -1,6 +1,6 @@
 # Portfolio (MDX + Next.js)
 
-Minimalist dark-mode portfolio with MDX, Next.js, and Tailwind. Includes reusable Header/Footer, CTF write-up pages, and a terminal-style component for commands.
+Minimalist dark-mode portfolio with MDX, Next.js, and Tailwind. Includes reusable Header/Footer, a **Projects** hub (CTF, ML, Development, Misc), CTF write-ups organized by platform and game, search, and a terminal-style component for commands.
 
 ## Getting started
 
@@ -18,25 +18,35 @@ Copy `.env.local.example` to `.env.local` and set your GitHub and LinkedIn URLs:
 - `NEXT_PUBLIC_GITHUB_URL`
 - `NEXT_PUBLIC_LINKEDIN_URL`
 
-## Resume page
+Optional: `NEXT_PUBLIC_SYNTAX_HIGHLIGHTER=prism` or `rsh` for the `<Terminal>` component (default is `rsh`).
 
-- **On-page content**: Edit `app/resume/page.mdx` and paste your resume (headings, lists, paragraphs). It renders as MDX on `/resume`.
-- **PDF**: Put your resume PDF at `public/resume.pdf`. The page has "View as PDF" (opens in a new tab) and "Download PDF" (downloads the file). If `resume.pdf` is missing, those links will 404 until you add it.
+## Projects structure
+
+- **`/projects`** — Hub with links to CTF, ML, Development, and Misc.
+- **`/projects/ctf`** — CTF hub: platforms (OverTheWire, Hack The Box, TryHackMe).
+- **`/projects/ctf/[platform]`** — Platform page listing games (e.g. Bandit, Leviathan).
+- **`/projects/ctf/[platform]/[game]`** — Game page listing level write-ups.
+- **`/projects/ctf/[platform]/[game]/[slug]`** — Individual write-up (MDX).
+
+Breadcrumbs and header **Search** (client-side over the project index) are available on project pages. The single source of truth for the hierarchy is `lib/project-config.ts`.
 
 ## Adding a new CTF write-up
 
-1. Copy the template: use the content of `content/ctf/template.mdx` as reference.
-2. Create a new page: `app/ctf/[machine-slug]/page.mdx` (e.g. `app/ctf/legacy/page.mdx`).
-3. Paste the template, replace the title and metadata, and fill in `<Terminal>` blocks with your commands and output.
-4. Add an entry to the list in `app/ctf/page.tsx` in the `captures` array so the new write-up appears on the CTF index.
+1. **Config**: In `lib/project-config.ts`, add a level entry to the right platform/game (e.g. under `ctfPlatforms.overthewire.games.bandit.levels`):
+   ```ts
+   { slug: "level-2", title: "Level 2", date: "2026-01-15" },
+   ```
+2. **Page**: Create `app/projects/ctf/[platform]/[game]/[slug]/page.mdx` (e.g. `app/projects/ctf/overthewire/bandit/level-2/page.mdx`). Use `content/ctf/template.mdx` as reference; fill in `<Terminal>` blocks with commands and output.
 
-Example entry:
+The write-up will appear on the game’s level list and in Search automatically.
 
-```ts
-{ slug: "legacy", title: "Legacy", platform: "HTB", date: "2025-01" },
-```
+## Resume page
+
+- **On-page content**: Edit `app/resume/page.mdx`; it renders as MDX on `/resume`.
+- **PDF**: Put your resume PDF at `public/resume.pdf`. The page has "View as PDF" and "Download PDF". If `resume.pdf` is missing, those links 404 until you add it.
 
 ## Tech
 
 - Next.js (App Router), MDX, Tailwind CSS, Lucide React
-- Syntax highlighting: prism-react-renderer and react-syntax-highlighter (pluggable)
+- Syntax highlighting: prism-react-renderer and react-syntax-highlighter (pluggable via env)
+- Static export (`output: "export"`) for deployment to static hosts

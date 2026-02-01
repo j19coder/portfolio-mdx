@@ -2,15 +2,16 @@
 
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
-import { Github, Linkedin, Mail, Menu, X } from "lucide-react";
+import { Github, Linkedin, Mail, Menu, Search, X } from "lucide-react";
 import LinkedInLink from "@/components/LinkedInLink";
+import SearchModal from "@/components/SearchModal";
 
 const GITHUB_URL = process.env.NEXT_PUBLIC_GITHUB_URL ?? "https://github.com";
 const EMAIL = process.env.NEXT_PUBLIC_EMAIL ?? "";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/ctf", label: "CTF" },
+  { href: "/projects", label: "Projects" },
   { href: "/resume", label: "Resume" },
   { href: "/about", label: "About" },
 ];
@@ -20,6 +21,7 @@ const linkClass =
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const closeMenu = useCallback(() => setMenuOpen(false), []);
 
@@ -53,6 +55,14 @@ export default function Header() {
             </Link>
           ))}
           <span className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search"
+              className="rounded p-1.5 text-zinc-400 transition hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 focus:ring-offset-zinc-950"
+            >
+              <Search size={20} />
+            </button>
             <a
               href={GITHUB_URL}
               target="_blank"
@@ -119,6 +129,17 @@ export default function Header() {
             ))}
             <div className="border-t border-zinc-800 pt-4 mt-4" />
             <div className="flex items-center justify-end gap-4 text-right">
+            <button
+              type="button"
+              onClick={() => {
+                setSearchOpen(true);
+                closeMenu();
+              }}
+              aria-label="Search"
+              className="rounded p-2 text-zinc-400 transition hover:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:ring-offset-2 focus:ring-offset-zinc-950"
+            >
+              <Search size={22} />
+            </button>
             <a
               href={GITHUB_URL}
               target="_blank"
@@ -148,6 +169,8 @@ export default function Header() {
           </div>
         </div>
       </div>
+
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }
