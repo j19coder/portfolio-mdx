@@ -1,0 +1,44 @@
+# Bandit Level 4 -> Level 5
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-13 00:14
+
+## Overview
+
+Bandit Level 4: The password for Level 5 is stored in a file named **`-file07`** in the `~/inhere` directory. 
+
+The `inhere` directory contains **10 files**, most of which are binary. The goal is to identify the **one text file** and read its contents to obtain the password.
+
+Because the filename starts with a dash (`-`), extra care is needed when referencing it from the command line.
+
+### **Connection:** 
+**Host:** `bandit.labs.overthewire.org`  
+**Port:** `2220`  
+**User:** `bandit4`  
+**Password:** (use the password from Level 3's `...Hiding-From-You` file)
+
+## Steps
+
+### 1. SSH into the server as bandit4
+
+<Terminal title="local" command="ssh bandit4@bandit.labs.overthewire.org -p 2220" output="(enter the password you found in Level 3 when prompted)" />
+
+### 2. Identify the text file in `~/inhere`
+
+<Terminal title="bandit4@bandit" prompt="bandit4@bandit:~$ " command="find inhere/ -type f -exec file {} \; | grep 'text'" output="inhere/-file07: ASCII text" />
+
+This confirms that `-file07` is the wanted file.
+
+### 3. Read the contents of `-file07`
+
+Because the filename starts with `-`, include the path explicitly:
+
+<Terminal title="bandit4@bandit" prompt="bandit4@bandit:~$ " command="cat inhere/-file07" output="(password for bandit5)" />
+
+The output is the password for Bandit Level 5. Use it to continue with `ssh bandit5@bandit.labs.overthewire.org -p 2220`.
+
+## Summary
+
+* The password is stored in a file named **`-file07`** inside the `inhere` directory. Identify the correct file and use `cat` to read its contents, taking care to handle the leading dash (`-`) in the filename.
+* Use `find` together with `file` to locate the text file among the binary files (e.g., `find inhere/ -type f -exec file {} \;`).

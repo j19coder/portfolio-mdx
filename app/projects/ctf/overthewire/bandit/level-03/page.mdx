@@ -1,0 +1,42 @@
+# Bandit Level 3 -> Level 4
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-13 00:06
+
+## Overview
+
+Bandit Level 3: The password for Level 4 is stored in a file named **`...Hiding-From-You`** in the `~/inhere` directory. Because the filename starts with `.`, it is interpreted as a hidden file. One can use tab completion to solve.
+
+### **Connection:** 
+**Host:** `bandit.labs.overthewire.org`  
+**Port:** `2220`  
+**User:** `bandit3`  
+**Password:** (use the password from Level 2's `--spaces in this filename--` file)
+
+## Steps
+
+### 1. SSH into the server as bandit3
+
+<Terminal title="local" command="ssh bandit3@bandit.labs.overthewire.org -p 2220" output="(enter the password you found in Level 2 when prompted)" />
+
+### 2. List hidden files in `~/inhere` directory
+
+<Terminal title="bandit3@bandit" prompt="bandit3@bandit:~$ " command="ls -la inhere/" output="-rw-r----- 1 bandit4 bandit3   ... ...Hiding-From-You" />
+
+The file is named `...Hiding-From-You`.
+
+### 3. Read the file named `...Hiding-From-You`
+
+Because the file starts with `.` it is interpreted as a hidden file:
+
+<Terminal title="bandit3@bandit" prompt="bandit3@bandit:~$ " command="cat inhere/...Hiding-From-You" output="(password for bandit4)" />
+
+Alternatively: `find . -type f -exec cat {} \;` ran from inside `inhere/` will work too.
+
+The output is the password for Bandit Level 4. Use it to continue with `ssh bandit4@bandit.labs.overthewire.org -p 2220`.
+
+## Summary
+
+- The password is in a file named `...Hiding-From-You`. Can use tab completion `cat inhere/...H<TAB>`
+- `ls -la` shows the hidden filename when `ls` alone will not.
