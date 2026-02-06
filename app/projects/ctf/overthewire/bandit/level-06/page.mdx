@@ -1,0 +1,47 @@
+# Bandit Level 6 -> Level 7
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-13 00:35
+
+## Overview
+
+Bandit Level 6: The password for Level 6 is stored in a file named **`bandit7.password`** in the `/var/lib/dpkg/info` directory. 
+
+To find the password for this level, one needs to search the server with the following properties:  
+
+```
+owned by user bandit7  
+owned by group bandit6  
+33 bytes in size
+```
+
+### **Connection:** 
+**Host:** `bandit.labs.overthewire.org`  
+**Port:** `2220`  
+**User:** `bandit6`  
+**Password:** (use the password from Level 5's `.file2` file)
+
+## Steps
+
+### 1. SSH into the server as bandit6
+
+<Terminal title="local" command="ssh bandit6@bandit.labs.overthewire.org -p 2220" output="(enter the password you found in Level 5 when prompted)" />
+
+### 2. Identify the file on the server
+
+<Terminal title="bandit6@bandit" prompt="bandit6@bandit:~$ " command="find / -type f -user bandit7 -group bandit6 -size 33c -exec file {} \; 2>/dev/null" output="/var/lib/dpkg/info/bandit7.password: ASCII text" />
+
+This confirms that `bandit7.password` is the wanted file.
+
+### 3. Read the contents of `bandit7.password`
+
+<Terminal title="bandit6@bandit" prompt="bandit6@bandit:~$ " command="cat /var/lib/dpkg/info/bandit7.password" output="(password for bandit7)" />
+
+The output is the password for Bandit Level 7. Use it to continue with `ssh bandit7@bandit.labs.overthewire.org -p 2220`.
+
+## Summary
+
+* The password is stored in a file named **`bandit7.password`** inside the `/var/lib/dpkg/info` directory. After identifying the correct file, use `cat` to read its contents.
+* Use `find` to locate the file on the **whole** server (e.g., `find / -type f -user bandit7 -group bandit6 -size 33c`).
+* Use `2>/dev/null` to suppress directories that are inaccessible because of permissions.
