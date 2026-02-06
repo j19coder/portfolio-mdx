@@ -1,3 +1,1 @@
-## Add this line to your Cloudflare Build configuration settings
-## Build command: npm run build && cp _redirects out/_redirects
 https://www.your-domain.com/* https://your-domain.com/:splat 301
