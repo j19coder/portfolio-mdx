@@ -1,0 +1,52 @@
+# Bandit Level 5 -> Level 6
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-13 00:28
+
+## Overview
+
+Bandit Level 5: The password for Level 5 is stored in a file named **`.file2`** in the `~/inhere/maybehere07` directory. 
+
+The `inhere` directory contains **20 folders**, and inside each folder are a list of files. 
+
+The goal is to identify the **file** with these attributes:
+
+```
+human-readable
+1033 bytes in size
+not executable
+```
+
+### **Connection:** 
+**Host:** `bandit.labs.overthewire.org`  
+**Port:** `2220`  
+**User:** `bandit5`  
+**Password:** (use the password from Level 4's `-file07` file)
+
+## Steps
+
+### 1. SSH into the server as bandit5
+
+<Terminal title="local" command="ssh bandit5@bandit.labs.overthewire.org -p 2220" output="(enter the password you found in Level 4 when prompted)" />
+
+### 2. Identify the text file in `~/inhere`
+
+<Terminal title="bandit5@bandit" prompt="bandit5@bandit:~$ " command="find inhere -type f ! -executable -size 1033c -exec file {} \; | grep text" output="inhere/maybehere07/.file2: ASCII text, with very long lines (1000)" />
+
+This confirms that `.file2` is the wanted file.
+
+### 3. Read the contents of `.file2`
+
+Because the filename starts with `.`, one might need to use `TAB` completion:
+
+<Terminal title="bandit5@bandit" prompt="bandit5@bandit:~$ " command="cat inhere/maybehere07/.file2" output="(password for bandit6)" />
+Alternatively: `find . -type f -size 1033c ! -executable` simply ran can find the file too.
+
+The output is the password for Bandit Level 6. Use it to continue with `ssh bandit6@bandit.labs.overthewire.org -p 2220`.
+
+## Summary
+
+* The password is stored in a file named **`.file2`** inside the `inhere` directory, which has 20 directories. Identify the correct file and use `cat` to read its contents, taking care to handle the leading dash (`.`) in the filename.
+* Use `find` together with `file` to locate the text file among the all directories & files (e.g., `find inhere -type f ! -executable -size 1033c -exec file {} \;`).
+* **Optional:** Use `grep` to search/check if file is a **text** file.
