@@ -1,0 +1,35 @@
+# Bandit Level 7 -> Level 8
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-13 00:37
+
+## Overview
+
+Bandit Level 7: The password for Level 8 is stored in a file named **`data.txt`** next to the word **`millionth`**. 
+
+One will need to read the file `data.txt` and filter it for lines containing the word `millionth`.
+
+### **Connection:** 
+**Host:** `bandit.labs.overthewire.org`  
+**Port:** `2220`  
+**User:** `bandit7`  
+**Password:** (use the password from Level 6's `/var/lib/dpkg/info/bandit7.password` file)
+
+## Steps
+
+### 1. SSH into the server as bandit7
+
+<Terminal title="local" command="ssh bandit7@bandit.labs.overthewire.org -p 2220" output="(enter the password you found in Level 6 when prompted)" />
+
+### 2. Search the file on the server using **grep**
+
+<Terminal title="bandit7@bandit" prompt="bandit7@bandit:~$ " command="cat data.txt | grep millionth" output="millionth       <bandit8's password>" />
+
+
+## Summary
+
+* The password is stored in a file named **`data.txt`** in the `home` directory of bandit7.
+* Use `cat` to print the contents of the file `data.txt`.
+* Use `grep` to search/filter the file for the word `millionth`.
+* Use `|` (pipe) to chain commands together.
