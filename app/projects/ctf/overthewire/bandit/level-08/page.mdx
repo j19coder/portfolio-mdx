@@ -1,0 +1,35 @@
+# Bandit Level 8 -> Level 9
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-13 00:47
+
+## Overview
+
+Bandit Level 8: The password for Level 9 is stored in a file named **`data.txt`** and is the only line of text that occurs only once. 
+
+One will need to read the file `data.txt` and find the line that occurs only once.
+
+### **Connection:** 
+**Host:** `bandit.labs.overthewire.org`  
+**Port:** `2220`  
+**User:** `bandit8`  
+**Password:** (use the password from Level 7's `data.txt` file)
+
+## Steps
+
+### 1. SSH into the server as bandit8
+
+<Terminal title="local" command="ssh bandit8@bandit.labs.overthewire.org -p 2220" output="(enter the password you found in Level 7 when prompted)" />
+
+### 2. Find the unique line
+
+<Terminal title="bandit8@bandit" prompt="bandit8@bandit:~$ " command="sort data.txt | uniq -u" output="(password for bandit9)" />
+
+
+## Summary
+
+* The password is stored in a file named **`data.txt`** in the `home` directory of bandit8.
+* Use `sort` to sort the contents of the file `data.txt`.
+* Use `uniq -u` to only print unique lines.
+* Use `|` (pipe) to chain commands together.

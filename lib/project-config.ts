@@ -72,6 +72,7 @@ export const ctfPlatforms: Record<PlatformKey, PlatformEntry> = {
           { slug: "level-05", title: "Level 5 → Level 6", date: "2025-12-13 00:28" },
           { slug: "level-06", title: "Level 6 → Level 7", date: "2025-12-13 00:35" },
           { slug: "level-07", title: "Level 7 → Level 8", date: "2025-12-13 00:37" },
+          { slug: "level-08", title: "Level 8 → Level 9", date: "2025-12-13 00:47" },
         ],
       },
       leviathan: { label: "Leviathan", levels: [] },
