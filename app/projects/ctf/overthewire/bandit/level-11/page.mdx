@@ -1,0 +1,35 @@
+# Bandit Level 11 -> Level 12
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-13 12:52
+
+## Overview
+
+Bandit Level 11: The password for Level 12 is stored in a file named **`data.txt`** that is encoded in a ROT13 (Rotate13). 
+
+One will need to decode the file `data.txt`.
+
+### **Connection:** 
+**Host:** `bandit.labs.overthewire.org`  
+**Port:** `2220`  
+**User:** `bandit11`  
+**Password:** (use the password from Level 10's `data.txt` file)
+
+## Steps
+
+### 1. SSH into the server as bandit11
+
+<Terminal title="local" command="ssh bandit11@bandit.labs.overthewire.org -p 2220" output="(enter the password you found in Level 10 when prompted)" />
+
+### 2. Find the unique line
+
+<Terminal title="bandit11@bandit" prompt="bandit11@bandit:~$ " command="cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'" output="The password is (password for bandit12)" />
+
+
+## Summary
+
+* The password is stored in a file named **`data.txt`** in the `home` directory of bandit11.
+* Use `cat` to print the contents of the file `data.txt`.
+* Use `tr` (translate) to replace characters from one set with another set.
+* Use `|` (pipe) to chain commands together.
