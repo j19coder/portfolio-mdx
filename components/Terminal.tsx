@@ -4,7 +4,9 @@ import React, { useCallback, useMemo, useState } from "react";
 import { Copy, Check } from "lucide-react";
 import CodeHighlight from "./CodeHighlight";
 
-export type TerminalLine = { type: "command"; text: string } | { type: "output"; text: string };
+export type TerminalLine =
+  | { type: "command"; text: string; prompt?: string }
+  | { type: "output"; text: string };
 
 export interface TerminalProps {
   title?: string;
@@ -27,9 +29,11 @@ function buildLines(props: TerminalProps): TerminalLine[] {
   return out;
 }
 
-function getFullTextToCopy(lines: TerminalLine[], prompt: string): string {
+function getFullTextToCopy(lines: TerminalLine[], defaultPrompt: string): string {
   return lines
-    .map((line) => (line.type === "command" ? `${prompt}${line.text}` : line.text))
+    .map((line) =>
+      line.type === "command" ? `${line.prompt ?? defaultPrompt}${line.text}` : line.text
+    )
     .join("\n");
 }
 
@@ -67,7 +71,7 @@ export default function Terminal({
           line.type === "command" ? (
             <CommandLine
               key={idx}
-              prompt={prompt}
+              prompt={line.prompt ?? prompt}
               text={line.text}
               language={language}
               onCopyCommand={() => navigator.clipboard.writeText(line.text)}

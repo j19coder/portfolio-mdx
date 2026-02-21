@@ -1,0 +1,81 @@
+# Bandit Level 12 -> Level 13
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-13 13:23
+
+## Overview
+
+Bandit Level 12: The password for Level 13 is stored in a file named **`data.txt`** that is a hexdump that has been repeatedly compressed. 
+
+One will need to decompress the file `data.txt` using multiple methods.
+
+### **Connection:** 
+**Host:** `bandit.labs.overthewire.org`  
+**Port:** `2220`  
+**User:** `bandit12`  
+**Password:** (use the password from Level 11's `data.txt` file)
+
+## Steps
+
+### 1. SSH into the server as bandit12
+
+<Terminal title="local" command="ssh bandit12@bandit.labs.overthewire.org -p 2220" output="(enter the password you found in Level 11 when prompted)" />
+
+### 2. Decompress the file
+
+<Terminal 
+    title="bandit12@bandit"
+    lines={[
+        { prompt: "bandit12@bandit:~$ ", type: "command", text: "cd $(mktemp -d)" }, 
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "cp ~/data.txt ." }, 
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "file data.txt" }, 
+        { type: "output", text: "data.txt: ASCII text" },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "xxd -r data.txt > data.gz" }, 
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "file data.gz" }, 
+        { type: "output", text: 'data.gz: gzip compressed data, was "data2.bin", last modified: Tue Oct 14 09:26:06 2025, max compression, from Unix, original size modulo 2^32 564' },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "gunzip data.gz" }, 
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "file data" }, 
+        { type: "output", text: 'data: bzip2 compressed data, block size = 900k' },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "bunzip2 data" }, 
+        { type: "output", text: "bunzip2: Can't guess original name for data -- using data.out" },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "file data.out" }, 
+        { type: "output", text: 'data.out: gzip compressed data, was "data4.bin", last modified: Tue Oct 14 09:26:06 2025, max compression, from Unix, original size modulo 2^32 20480' },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "mv data.out data.gz" }, 
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "gunzip data.gz" },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "file data" },  
+        { type: "output", text: 'data: POSIX tar archive (GNU)' },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "tar -xvf data" },  
+        { type: "output", text: 'data5.bin' },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "file data5.bin" },  
+        { type: "output", text: 'data: POSIX tar archive (GNU)' },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "tar -xvf data5.bin" },  
+        { type: "output", text: 'data6.bin' },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "file data6.bin" },  
+        { type: "output", text: 'data6.bin: bzip2 compressed data, block size = 900k' },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "bunzip2 data6.bin" },  
+        { type: "output", text: "bunzip2: Can't guess original name for data6.bin -- using data6.bin.out" },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "file data6.bin.out" },  
+        { type: "output", text: "data6.bin.out: POSIX tar archive (GNU)" },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "tar -xvf data6.bin.out" },
+        { type: "output", text: "data8.bin" },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "file data8.bin" },
+        { type: "output", text: 'data8.bin: gzip compressed data, was "data9.bin", last modified: Tue Oct 14 09:26:06 2025, max compression, from Unix, original size modulo 2^32 49' },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "mv data8.bin data8.gz" },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "gunzip data8.gz" },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "file data8" },
+        { type: "output", text: "data8: ASCII text" },
+        { prompt: "bandit12@bandit:/tmp/tmp.oFAA0IaH0q$ ", type: "command", text: "cat data8" },
+        { type: "output", text: "The password is (password for bandit13)" },
+    ]}
+/>
+
+
+## Summary
+
+* The password is stored in a compressed file named **`data.txt`** in the `home` directory of bandit12.
+* Use `cd $(mktemp -d)` command to create a temp directory and change into that newly created directory.
+* Use `cp` to copy file(s).
+* Use `file` to ID the file type.
+* Use multiple decompress commands: `xxd -r`, `gunzip`, `bunzip2`, and `tar -xvf`.
+* Use `cat` to send text file(s) to stdout.
