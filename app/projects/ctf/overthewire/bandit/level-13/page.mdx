@@ -1,0 +1,72 @@
+# Bandit Level 13 -> Level 14
+
+- **Platform**: OverTheWire
+- **Wargame**: Bandit
+- **Date**: 2025-12-13 18:02
+
+## Overview
+
+Bandit Level 13: The password for Level 14 is stored in a file named **`/etc/bandit_pass/bandit14`** that and can only be read by user bandit14. One doesn't need the next password, but the private SSH key.
+
+### **Connection:** 
+**Host:** `bandit.labs.overthewire.org`  
+**Port:** `2220`  
+**User:** `bandit13`  
+**Password:** (use the password from Level 12's `data.txt` file)
+
+## Steps
+
+### 1. SSH into the server as bandit13
+
+<Terminal 
+    title="local" 
+    command="ssh bandit13@bandit.labs.overthewire.org -p 2220" 
+    output="(enter the password you found in Level 12 when prompted)" 
+/>
+
+### 2. Find the private key
+
+<Terminal 
+    title="bandit13@bandit" 
+    lines={[
+        { prompt: "bandit13@bandit:~$ ", type: "command", text: "ls" },
+        { type: "output", text: "sshkey.private" },
+        { prompt: "bandit13@bandit:~$ ", type: "command", text: "exit" },
+    ]}
+/>
+
+### 3. Get the private key
+
+<Terminal 
+    title="local" 
+    lines={[
+        { prompt: "$ ", type: "command", text: "scp -P 2220 bandit13@bandit.labs.overthewire.org:sshkey.private ." },
+        { type: "output", text: "(enter the password you found in Level 12 when prompted)" },
+        { prompt: "$ ", type: "command", text: "ls" },
+        { type: "output", text: "sshkey.private" },
+        { prompt: "$ ", type: "command", text: "chmod 600 sshkey.private" },
+    ]}
+/>
+
+### 4. Log in as bandit14
+
+<Terminal 
+    title="local" 
+    command="ssh -i sshkey.private bandit14@bandit.labs.overthewire.org -p 2220" 
+/>
+
+### 5. Secure bandit14's password
+
+<Terminal 
+    title="bandit14@bandit" 
+    prompt="bandit14@bandit:~$ "
+    command="cat /etc/bandit_pass/bandit14" 
+    output="(password for bandit14)" 
+/>
+
+## Summary
+
+* Retrieve the private ssh key named `sshkey.private` to login as bandit14.
+* Use `scp` to securely copy file(s).
+* Use `chmod` to change permissions on the private key file.
+* Use `cat` to send text file to stdout.
